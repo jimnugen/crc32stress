@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 		length = strtoul(argv[1], NULL, 0);
 		iterations = strtoul(argv[2], NULL, 0);
 	}
-	data = memalign(getpagesize(), length);
+	data = (unsigned char *)memalign(getpagesize(), length);
 
 	srandom(1);
 	for (i = 0; i < length; i++)
