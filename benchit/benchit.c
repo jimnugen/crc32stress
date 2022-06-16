@@ -111,21 +111,21 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	printf("CRC value	: %08x\n", crc);
+	printf("CRC value    : %08x\n", crc);
 	printf("cpu cycles   : %"PRIu64"\n", cycles);
 
 	double freq =  cycles / (elapsed * 1000000000);
 
-	printf("cpu frequency: %.3f GHz.\n", freq);
+	printf("cpu frequency: %.3f GHz\n", freq);
 
-	printf("Elapsed time : %.3f seconds.\n", elapsed);
+	printf("Elapsed time : %.3f seconds\n", elapsed);
 	unsigned long long total_bytes = length * iterations;
 	setlocale(LC_NUMERIC, "");
 	printf("Bytes scanned: %'llu\n", total_bytes);
 	double GB_sec = total_bytes / ( elapsed * 1000000000);
-	printf("GB / sec	 : %.2lf\n", GB_sec);
+	printf("GB / sec     : %.2lf\n", GB_sec);
 	double bytes_cyc = total_bytes / cycles;
-	printf("B / cyc	  : %.2lf\n", bytes_cyc);
+	printf("B / cyc      : %.2lf\n", bytes_cyc);
 
 	return 0;
 }
