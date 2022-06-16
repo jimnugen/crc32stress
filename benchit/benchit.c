@@ -26,15 +26,6 @@ struct read_format {
 	} values[];
 };
 
-static long
-perf_event_open(struct perf_event_attr *hw_event, pid_t pid,
-		int cpu, int group_fd, unsigned long flags)
-{
-	int ret;
-	ret = syscall(__NR_perf_event_open, hw_event, pid, cpu, group_fd, flags);
-	return ret;
-}
-
 unsigned int crc32_vpmsum(unsigned int crc, unsigned char *p, unsigned long len);
 
 int main(int argc, char *argv[])
@@ -64,7 +55,7 @@ int main(int argc, char *argv[])
 
 	struct perf_event_attr pea;
 	int fd1;
-	uint64_t cycles;
+	uint64_t cycles=0;
 	uint64_t id1;
 	char buf[4096];
 	struct read_format* rf = (struct read_format*) buf;
@@ -124,7 +115,7 @@ int main(int argc, char *argv[])
 	printf("Bytes scanned: %'llu\n", total_bytes);
 	double GB_sec = total_bytes / ( elapsed * 1000000000);
 	printf("GB / sec     : %.2lf\n", GB_sec);
-	double bytes_cyc = total_bytes / cycles;
+	double bytes_cyc = (double)total_bytes / cycles;
 	printf("B / cyc      : %.2lf\n", bytes_cyc);
 
 	return 0;
